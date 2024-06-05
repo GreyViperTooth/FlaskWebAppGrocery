@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../static/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon-16x16.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insights-Admin Tools</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .gradient-custom {
+            background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+        }
+
+        canvas#barChart {
+            max-width: 500px;
+            max-height: 700px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    {% include 'navbar_admin.html' %}
+    <div class="container mt-4">
+        <h1>Welcome, Admin!</h1>
+        <h3>Here are some cool graphs to analyze:</h3>
+        <br><br>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h2>Quantity of Items in Each Category</h2>
+                <img src="data:image/png;base64,{{ chart_data_pie }}" alt="Total Quantity of Items in Each Category" class="img-fluid">
+            </div>
+            <div class="col-md-6">
+                <h2>Total Sales by Date</h2>
+                <canvas id="barChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var ctx = document.getElementById('barChart').getContext('2d');
+                var chartDataBar = {{ chart_data_bar | tojson }};
+                var myBarChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: chartDataBar,
+                    options: {
+                        responsive: true,
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Date'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Total Price'
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+    </div>
+</body>
+</html>

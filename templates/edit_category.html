@@ -1,0 +1,27 @@
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../static/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon-16x16.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Category</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .gradient-custom {
+        background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+         }
+    </style>
+</head>
+<body>
+    {% include 'navbar_admin.html' %}
+    <div class="container">
+        <h1 class="mt-4 mb-4">Edit Category</h1>
+        <form method="POST" action="/update_category/{{ category.category_id }}">
+            <div class="form-group">
+                <label for="category_name">Category Name:</label>
+                <input type="text" name="category_name" class="form-control" value="{{ category.catName }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Category</button>
+        </form>
+    </div>
+</body>
+</html>

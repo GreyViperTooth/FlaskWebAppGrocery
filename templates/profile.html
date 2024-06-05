@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../static/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon-16x16.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .gradient-custom {
+        background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+         }
+    </style>
+</head>
+<body>
+    {% include 'navbar_user.html' %}
+    <div class="container mt-5">
+        <h1 class="mb-4">User Profile</h1>
+
+        {% if user %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2>Welcome, {{ user.username }}!</h2>
+                </div>
+                <div class="card-body">
+                    <p>Email: {{ user.email }}</p>
+                    <p>Mobile: {{ user.mob }}</p>
+                </div>
+            </div>
+
+            <h2 class="mb-3">Previous Orders:</h2>
+            <ul class="list-group">
+                {% for order in orders %}
+                    <li class="list-group-item">
+                        Order ID: {{ order.order_id }} - Date: {{ order.order_date }} - Total Price: {{ order.total_price }}
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <h2 class="mt-4 mb-3">Edit User Details:</h2>
+            <form method="POST" action="/edit_profile" class="mb-4">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" class="form-control" value="{{ user.username }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" class="form-control" value="{{ user.email }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="mob">Mobile:</label>
+                    <input type="text" name="mob" class="form-control" value="{{ user.mob }}" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Profile</button>
+            </form>
+
+            <a href="/logout" class="btn btn-danger">Logout</a>
+        {% else %}
+            <p>Please log in to view your profile.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+

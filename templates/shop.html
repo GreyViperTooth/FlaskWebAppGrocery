@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QuicKart Store</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../static/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon-16x16.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .category {
+            margin-bottom: 20px;
+            background-color: #9fc6ed8f;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .category h3 {
+            margin-bottom: 0;
+        }
+        .product-card {
+            margin-bottom: 10px;
+            background-color: #d0f3fff3;
+        }
+        .card-title {
+            font-weight: bold;
+        }
+        
+    .product-card.out-of-stock {
+      border: 1px solid #ccc;
+      background-color: #f8f8f8; 
+     opacity: 0.6; 
+     pointer-events: none; 
+    }   
+
+    .red-line {
+            color: red;
+        }
+
+        .gradient-custom {
+            background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar_user.html' %}
+    <div class="container">
+        <h1 class="mt-4 mb-4">Buy More, Worry Less</h1>
+
+        {% if search_query %}
+            <p>Search Results for: "{{ search_query }}"</p>
+        {% endif %}
+
+        <div class="row">
+            {% for cat in categorylist %}
+            <div class="col-md-12">
+                <div class="category">
+                    <h3>{{ cat['catName'] }}</h3>
+                    <div class="row">
+                        {% for product in cat['items'] %}
+                        <div class="col-md-4">
+                            <div class="card product-card {% if product['qty'] <= 0 %}out-of-stock{% endif %}">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ product['name'] }}</h4>
+                                    <p class="card-text">Man/Exp date: {{ product['dom'] }} - {{ product['doe'] }}</p>
+                                    <h5 class="card-text">Price per {{ product['unit'] }}: Rs. {{ product['price'] }}</h5> 
+                                    <p class="card-text {% if product['qty'] <= 0 %}red-line{% endif %}">Quantity Available: {{ product['qty'] }}</p>
+                                    <form method="POST" action="/add_to_cart">
+                                        <input type="hidden" name="item_id" value="{{ product['item_id'] }}">
+                                        <div class="form-group" >
+                                            <label for="quantity">Quantity:</label>
+                                            <input type="number" name="quantity" class="form-control" value="1" min="1" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+

@@ -1,0 +1,180 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Grocery Store API"
+paths:
+  /api/items:
+    post:
+      tags:
+        - Items
+      summary: Create a new item
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: item
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              qty:
+                type: integer
+              dom:
+                type: string
+                format: date
+              doe:
+                type: string
+                format: date
+              price:
+                type: integer
+              unit:
+                type: string
+      responses:
+        "201":
+          description: Item created successfully
+    get:
+      tags:
+        - Items
+      summary: Get all items
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                qty:
+                  type: integer
+                dom:
+                  type: string
+                  format: date
+                doe:
+                  type: string
+                  format: date
+                price:
+                  type: integer
+                unit:
+                  type: string
+
+  /api/items/{item_id}:
+    put:
+      tags:
+        - Items
+      summary: Update an item
+      parameters:
+        - in: path
+          name: item_id
+          required: true
+          type: integer
+        - in: body
+          name: item
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              qty:
+                type: integer
+              dom:
+                type: string
+                format: date
+              doe:
+                type: string
+                format: date
+              price:
+                type: integer
+              unit:
+                type: string
+      responses:
+        "200":
+          description: Item updated successfully
+        "404":
+          description: Item not found
+    delete:
+      tags:
+        - Items
+      summary: Delete an item
+      parameters:
+        - in: path
+          name: item_id
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: Item deleted successfully
+        "404":
+          description: Item not found
+
+  /api/categories:
+    post:
+      tags:
+        - Categories
+      summary: Create a new category
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: category
+          schema:
+            type: object
+            properties:
+              catName:
+                type: string
+      responses:
+        "201":
+          description: Category created successfully
+    get:
+      tags:
+        - Categories
+      summary: Get all categories
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                catName:
+                  type: string
+
+  /api/categories/{category_id}:
+    put:
+      tags:
+        - Categories
+      summary: Update a category
+      parameters:
+        - in: path
+          name: category_id
+          required: true
+          type: integer
+        - in: body
+          name: category
+          schema:
+            type: object
+            properties:
+              catName:
+                type: string
+      responses:
+        "200":
+          description: Category updated successfully
+        "404":
+          description: Category not found
+    delete:
+      tags:
+        - Categories
+      summary: Delete a category
+      parameters:
+        - in: path
+          name: category_id
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: Category deleted successfully
+        "404":
+          description: Category not found

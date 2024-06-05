@@ -1,0 +1,72 @@
+
+
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.centre-button {
+  display: flex;
+  justify-content: center;
+}
+
+.background-image {
+  background-image: url(https://img.freepik.com/free-photo/abundance-healthy-food-choices-supermarket-aisle-generated-by-ai_188544-42447.jpg?t=st=1691011208~exp=1691014808~hmac=9dcd34c68c811ef72b33bc33ebadb72a3755ec35bd36f801cb35b08788f73bf9&w=1380); /* Replace with your image URL */
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 80%;
+  max-width: 600px;
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+  color: #fff; /* Text color */
+  background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.login-btn,
+.signup-btn {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-btn {
+  background-color: #54e876; 
+  color: #000;
+}
+
+.signup-btn {
+  background-color: #54e876; 
+  color: #000;
+}
+
+.login-btn:hover,
+.signup-btn:hover {
+  opacity: 0.8;
+}
