@@ -1,3 +1,5 @@
+# This is a toy project for my learning
+
 # Local Setup
 - Clone the project
 - Run `setup.sh`
